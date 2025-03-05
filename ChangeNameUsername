@@ -1,0 +1,37 @@
+@echo off
+title Change Computer Name and User Name
+echo Changing Computer Name and User Name...
+echo.
+
+:: Ensure the script is running as administrator
+net session >nul 2>&1
+if %errorLevel% neq 0 (
+    echo Please run this script as Administrator.
+    pause
+    exit
+)
+
+:: ----------------- CHANGE COMPUTER NAME -----------------
+:: Replace "NewComputerName" with the desired computer name
+set /p newComputerName="Enter new computer name: "
+echo Changing computer name to %newComputerName%...
+
+wmic computersystem where name="%COMPUTERNAME%" call rename name="%newComputerName%"
+echo Computer name changed to %newComputerName%.
+
+:: ----------------- CHANGE USER NAME -----------------
+:: Replace "NewUserName" with the desired user name
+set /p newUserName="Enter new user name: "
+echo Changing user name to %newUserName%...
+
+:: This command changes the local user profile name.
+wmic useraccount where name="%username%" rename "%newUserName%"
+echo User name changed to %newUserName%.
+
+:: ----------------- WARNING AND RESTART -----------------
+echo.
+echo The computer name and user name have been changed.
+echo You may need to restart your computer for the changes to fully take effect.
+pause
+shutdown /r /t 10
+exit
