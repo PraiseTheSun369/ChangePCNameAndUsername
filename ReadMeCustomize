@@ -1,0 +1,9 @@
+How to Customize:
+
+Computer Name: Enter the desired new computer name when prompted.
+User Name: Enter the desired new user name when prompted.
+If you want to hard-code the names without the prompt, replace: 
+set /p newComputerName="Enter new computer name: " and set /p newUserName="Enter new user name: " with the values directly like so:
+
+set newComputerName=NewPCName
+set newUserName=NewUserName
